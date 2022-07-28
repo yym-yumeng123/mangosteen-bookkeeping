@@ -1,6 +1,7 @@
 class Api::V1::ItemsController < ApplicationController
   def index
-    head 422
+    items = Item.page(1).per(10)
+    render json: items, status: :ok
   end
   
   def create
