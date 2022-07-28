@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
-      resources :validation_code, only: [:create]
+      resources :validation_codes, only: [:create]
       resource :session, only: [:create, :destroy]
       resource :me, only: [:show]
       resources :items
