@@ -26,3 +26,12 @@ docker run -d --name db-for-mangosteen -e POSTGRES_USER=mangosteen   -e POSTGRES
 ```bash
 code --install-extension ms-vscode-remote.remote-containers@0.251.0
 ```
+
+
+### 接口调试
+
+```bash
+curl -X POST http://127.0.0.1:3000/api/v1/validation_codes  # post
+curl -X POST http://127.0.0.1:3000/api/v1/items
+curl -v http://127.0.0.1:3000/api/v1/items # get
+```

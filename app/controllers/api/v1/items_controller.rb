@@ -1,16 +1,15 @@
 class Api::V1::ItemsController < ApplicationController
   def index
-    items = Item.page(1).per(10)
-    render json: items, status: :ok
+    items = Item.page(params[:page])
+    render json: { resources: items }, status: :ok
   end
-  
+
   def create
-    item = Item.new amount: 1
+    item = Item.new amount: 11
     if item.save
-      render json: item, status: :created
+      render json: { resouce: item }, status: :created
     else
-      render json: item.errors, status: :unprocessable_entity
+      render json: { errors: item.errors }, status: :unprocessable_entity
     end
   end
-  
 end
