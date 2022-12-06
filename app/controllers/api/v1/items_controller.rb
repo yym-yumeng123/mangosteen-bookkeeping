@@ -5,7 +5,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new amount: 11
+    item = Item.new amount: params[:amount]
     if item.save
       render json: { resouce: item }, status: :created
     else

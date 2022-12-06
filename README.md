@@ -1,5 +1,11 @@
 # README
 
+### ruby-china 源
+
+```bash
+bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+```
+
 ### 创建项目
 
 ```bash
@@ -30,8 +36,23 @@ code --install-extension ms-vscode-remote.remote-containers@0.251.0
 
 ### 接口调试
 
+1. curl
+
 ```bash
 curl -X POST http://127.0.0.1:3000/api/v1/validation_codes  # post
+-H 'Content-type: aplication/json' # 添加请求头
+-d {"amount": 99} # 添加消息体
+
+
 curl -X POST http://127.0.0.1:3000/api/v1/items
 curl -v http://127.0.0.1:3000/api/v1/items # get
+```
+
+2. postman 等工具
+3. 写测试用例
+```bash
+rails generate --help | grep rspec  # rspec 常用命令
+
+$ bundle binstubs rspec-core
+bin/rspec
 ```
