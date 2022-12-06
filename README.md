@@ -17,3 +17,12 @@ oh-my-env docker 环境
 # -v 新增一个数据卷
 docker run -d --name db-for-mangosteen -e POSTGRES_USER=mangosteen   -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=mangosteen_dev -e PGDATA=/var/lib/postgresql/data/pgdata -v mangosteen-data:/var/lib/postgresql/data --network=network1 postgres:14
 ```
+
+### Reopen in container 报错，怎么办
+
+1. 卸载 vscode 的 dev container 插件
+
+2. 
+```bash
+code --install-extension ms-vscode-remote.remote-containers@0.251.0
+```
