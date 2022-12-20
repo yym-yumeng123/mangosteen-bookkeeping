@@ -7,8 +7,7 @@ resource "Validation Codes" do
     let(:email) { '1@qq.com' }
     example "请求发送验证码" do
       do_request
-      expect(status).to eq 201
-
+      expect(status).to eq 200
     end
   end
 end

@@ -55,4 +55,6 @@ rails generate --help | grep rspec  # rspec 常用命令
 
 $ bundle binstubs rspec-core
 bin/rspec
+
+bin/rake docs:generate # 生成 api
 ```

@@ -162,11 +162,46 @@ Content-Type: text/plain; charset=utf-8
 Vary: Accept
 ETag: W/&quot;36a9e7f1c95b82ffb99743e0c5c4ce95&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: fe122f9f-d192-4c92-9683-27c4877fed7c
-X-Runtime: 0.039968
+X-Request-Id: 10f7ab15-dfd0-491d-97d9-250516229891
+X-Runtime: 0.061874
 Content-Length: 1</pre>
             <h4>Status</h4>
-            <pre class="response status">201 Created</pre>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[binary data]</pre>
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">Version: HTTP/1.0
+Accept: application/json
+Content-Type: application/json
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">POST /api/v1/validation_codes</pre>
+
+
+            <h4>Body</h4>
+            <pre class="request body">{"email":"1@qq.com"}</pre>
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 0
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Permitted-Cross-Domain-Policies: none
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: text/plain; charset=utf-8
+Vary: Accept
+Cache-Control: no-cache
+X-Request-Id: c1d461f2-c4e2-4a38-bc0d-bed5a1dcd2c8
+X-Runtime: 0.002584
+Content-Length: 1</pre>
+            <h4>Status</h4>
+            <pre class="response status">429 Too Many Requests</pre>
               <h4>Body</h4>
               <pre class="response body">[binary data]</pre>
       </div>
