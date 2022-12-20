@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 
 gem "kaminari"
 gem 'dotenv-rails'
+gem 'rspec_api_documentation'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
