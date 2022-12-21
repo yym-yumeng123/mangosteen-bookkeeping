@@ -58,3 +58,7 @@ bin/rspec
 
 bin/rake docs:generate # 生成 api
 ```
+- 秘钥
+```
+EDITOR="code --wait" rails credentials:edit
+```

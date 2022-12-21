@@ -18,8 +18,6 @@ class Api::V1::SessionsController < ApplicationController
       payload = { user_id: user.id }
       token = JWT.encode payload, Rails.application.credentials.hmac_secret, 'HS256'
 
-      p token
-      p '------------'
       render status: :ok, json: {
         jwt: token
       }
