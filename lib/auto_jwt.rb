@@ -5,8 +5,6 @@ class AutoJwt
 
   def call(env)
     header = env["HTTP_AUTHORIZATION"]
-    p 'header'
-    p header
     jwt = header.split(" ")[1] rescue ""
     payload = JWT.decode jwt, Rails.application.credentials.hmac_secret, true, { algorithm: "HS256" } rescue nil
     env["current_user_id"] = payload[0]["user_id"] rescue nil
