@@ -9,6 +9,12 @@ class Api::V1::TagsController < ApplicationController
       count: Tag.count
     }}
   end
+
+  def show
+    tag = Tag.find params[:id]
+    return head :forbidden unless tag.user_id == request.env['current_user_id']
+    render json: {resource: tag}
+  end
   
   def create
     current_user = User.find request.env['current_user_id']
