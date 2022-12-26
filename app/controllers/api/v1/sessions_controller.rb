@@ -10,12 +10,7 @@ class Api::V1::SessionsController < ApplicationController
     end
 
 
-    user = User.find_by(email: params[:email])
-
-    if user.nil? 
-      render status: :not_found, json: { errors: '用户不存在' }
-    else
-      render status: :ok, json: { jwt: user.generate_jwt }
-    end
+    user = User.find_or_create_by email: params[:email]
+    render status: :ok, json: { jwt: user.generate_jwt }
   end
 end
