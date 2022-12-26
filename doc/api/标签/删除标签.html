@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>会话 API</title>
+    <title>标签 API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,75 +106,28 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>会话 API</h1>
+      <h1>标签 API</h1>
 
       <div class="article">
-        <h2>登录</h2>
-        <h3>POST /api/v1/session</h3>
+        <h2>删除标签</h2>
+        <h3>DELETE /api/v1/tags/:id</h3>
 
-          <h3>Parameters</h3>
-          <table class="parameters table table-striped table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="required">
-                    <span class="name">email</span>
-                </td>
-                <td>
-                  <span class="description">邮箱</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="required">
-                    <span class="name">code</span>
-                </td>
-                <td>
-                  <span class="description">验证码</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
 
-          <h3>Response Fields</h3>
-          <table class="response-fields table table-striped table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                    <span class="name">jwt</span>
-                </td>
-                <td>
-                  <span class="description">用于验证用户身份的 token</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
 
           <h3>Request</h3>
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4MSwiZXhwIjoxNjcyMDcwMDkzfQ.0kBL7DSagUwfAalBaUobQz5RM8_GDijKatuSZbw7sCA
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /api/v1/session</pre>
+          <pre class="request route highlight">DELETE /api/v1/tags/186</pre>
 
 
-            <h4>Body</h4>
-            <pre class="request body">{"email":"1@qq.com","code":"123456"}</pre>
 
 
             <h3>Response</h3>
@@ -185,17 +138,13 @@ X-Content-Type-Options: nosniff
 X-Download-Options: noopen
 X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
-Content-Type: application/json; charset=utf-8
-Vary: Accept
-ETag: W/&quot;474aa69d6b79bbab46757f1121a44966&quot;
-Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 448da3dc-fd18-46fe-a695-e792dd18f4cd
-X-Runtime: 0.004666
-Content-Length: 117</pre>
+Content-Type: application/json
+Cache-Control: no-cache
+X-Request-Id: 2cdbad65-bba5-4b71-a3a0-97c60d0f0606
+X-Runtime: 0.006182
+Content-Length: 0</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
-              <h4>Body</h4>
-              <pre class="response body">[binary data]</pre>
       </div>
     </div>
   </body>
