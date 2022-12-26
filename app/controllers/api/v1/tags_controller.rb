@@ -21,4 +21,14 @@ class Api::V1::TagsController < ApplicationController
       render json: {errors: tag.errors}, status: :unprocessable_entity
     end
   end
+
+  def update
+    tag = Tag.find params[:id]
+    tag.update params.permit(:name, :sign)
+    if tag.errors.empty?
+      render json: {resource: tag}
+    else
+      render json: {errors: tag.errors}, status: :unprocessable_entity
+    end
+  end
 end
