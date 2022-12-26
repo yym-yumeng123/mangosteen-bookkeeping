@@ -110,27 +110,8 @@ table th, table td {
 
       <div class="article">
         <h2>获取标签</h2>
-        <h3>GET /api/v1/tags</h3>
+        <h3>GET /api/v1/tags/:id</h3>
 
-          <h3>Parameters</h3>
-          <table class="parameters table table-striped table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                    <span class="name">page</span>
-                </td>
-                <td>
-                  <span class="description">页码</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
 
           <h3>Response Fields</h3>
           <table class="response-fields table table-striped table-bordered table-condensed">
@@ -143,7 +124,7 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">resources[id]</span>
+                    <span class="name">resource[id]</span>
                 </td>
                 <td>
                   <span class="description">ID</span>
@@ -151,7 +132,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resources[name]</span>
+                    <span class="name">resource[name]</span>
                 </td>
                 <td>
                   <span class="description">名称</span>
@@ -159,7 +140,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resources[sign]</span>
+                    <span class="name">resource[sign]</span>
                 </td>
                 <td>
                   <span class="description">符号</span>
@@ -167,7 +148,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resources[user_id]</span>
+                    <span class="name">resource[user_id]</span>
                 </td>
                 <td>
                   <span class="description">用户ID</span>
@@ -175,7 +156,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resources[deleted_at]</span>
+                    <span class="name">resource[deleted_at]</span>
                 </td>
                 <td>
                   <span class="description">删除时间</span>
@@ -188,14 +169,14 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3OCwiZXhwIjoxNjcyMDcwMDkzfQ.jhZoELgRifGKC8sfndS5_RJVawYrZhiFnHs9ns5Npb8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjQsImV4cCI6MTY3MjA3MDMwNH0.xjvk_y7UkKqfGT79Z2mPjA5VqjLHrmGmcaWSOMkX-ek
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/v1/tags</pre>
+          <pre class="request route highlight">GET /api/v1/tags/247</pre>
 
 
 
@@ -210,11 +191,11 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;e11f71da1012695628b59f3e52bed296&quot;
+ETag: W/&quot;ec1985e06fff1fb88ddb5b736261d0c0&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 354e5deb-5b0b-4bd7-a0b4-d7e35380910c
-X-Runtime: 0.007923
-Content-Length: 1499</pre>
+X-Request-Id: 06d39f63-2ad2-4cd8-98e9-f0b253f26b88
+X-Runtime: 0.001934
+Content-Length: 157</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>

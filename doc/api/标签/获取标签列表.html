@@ -109,8 +109,8 @@ table th, table td {
       <h1>标签 API</h1>
 
       <div class="article">
-        <h2>创建标签</h2>
-        <h3>POST /api/v1/tags</h3>
+        <h2>获取标签列表</h2>
+        <h3>GET /api/v1/tags</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -122,19 +122,11 @@ table th, table td {
             </thead>
             <tbody>
               <tr>
-                <td class="required">
-                    <span class="name">name</span>
+                <td>
+                    <span class="name">page</span>
                 </td>
                 <td>
-                  <span class="description">名称</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="required">
-                    <span class="name">sign</span>
-                </td>
-                <td>
-                  <span class="description">符号</span>
+                  <span class="description">页码</span>
                 </td>
               </tr>
             </tbody>
@@ -151,7 +143,7 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">resource[id]</span>
+                    <span class="name">resources[id]</span>
                 </td>
                 <td>
                   <span class="description">ID</span>
@@ -159,7 +151,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resource[name]</span>
+                    <span class="name">resources[name]</span>
                 </td>
                 <td>
                   <span class="description">名称</span>
@@ -167,7 +159,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resource[sign]</span>
+                    <span class="name">resources[sign]</span>
                 </td>
                 <td>
                   <span class="description">符号</span>
@@ -175,7 +167,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resource[user_id]</span>
+                    <span class="name">resources[user_id]</span>
                 </td>
                 <td>
                   <span class="description">用户ID</span>
@@ -183,7 +175,7 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">resource[deleted_at]</span>
+                    <span class="name">resources[deleted_at]</span>
                 </td>
                 <td>
                   <span class="description">删除时间</span>
@@ -196,18 +188,16 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjEsImV4cCI6MTY3MjA3MDMwNH0.g4iOgupFfTi2RQOQfUsJdNpQCyzAj4N_65Kb38mkVYo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjAsImV4cCI6MTY3MjA3MDMwNH0.W26zTe0p4ADOqZfdDOFTQ-kQuA5cejC3KeFNth6fWUk
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /api/v1/tags</pre>
+          <pre class="request route highlight">GET /api/v1/tags</pre>
 
 
-            <h4>Body</h4>
-            <pre class="request body">{"name":"x","sign":"x"}</pre>
 
 
             <h3>Response</h3>
@@ -220,11 +210,11 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;deeaba420569db6e5cfc5832b3894b47&quot;
+ETag: W/&quot;bcded0c92bef65db6a5ebe5cab95fcaa&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 4e8119cb-d824-4cfe-bc1d-d616f57c3d5f
-X-Runtime: 0.003856
-Content-Length: 157</pre>
+X-Request-Id: b0c6a756-5568-4db7-a2b2-d87735c60668
+X-Runtime: 0.005906
+Content-Length: 1509</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
