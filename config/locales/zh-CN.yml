@@ -22,3 +22,9 @@ zh-CN:
               blank: 标签组不能为空
             happend_at:
               blank: happend_at 不能为空
+  activemodel:
+    errors:
+      messages:
+        invalid: 格式不正确
+        blank: 必填
+        not_found: 找不到对应的记录
