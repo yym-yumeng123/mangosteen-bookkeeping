@@ -10,6 +10,6 @@ class ValidationCode < ApplicationRecord
   end
 
   def send_email
-    UserMailer.welcome_email self.email
+    UserMailer.welcome_email(self.email).deliver_later
   end
 end
