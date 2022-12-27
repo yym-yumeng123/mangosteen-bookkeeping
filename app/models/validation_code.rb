@@ -3,6 +3,8 @@ class ValidationCode < ApplicationRecord
   after_create :send_email
   validates_presence_of :email
 
+  validates :email, format: {with: /\A.+@.+\z/}
+
   enum kind: { sign_in: 0, reset_password: 1}
 
   def generate_code
