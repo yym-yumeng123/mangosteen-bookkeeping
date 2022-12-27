@@ -25,20 +25,32 @@ class Api::V1::ItemsController < ApplicationController
   def summary
     hash = Hash.new
     items = Item
-      .where(user_id: request.env["current_user_id"])
+      .where(user_id: request.env['current_user_id'])
       .where(kind: params[:kind])
       .where(happend_at: params[:happened_after]..params[:happened_before])
     items.each do |item|
-      key = item.happend_at.in_time_zone("Beijing").strftime("%F")
-      hash[key] ||= 0
-      hash[key] += item.amount
+      if params[:group_by] == 'happend_at'
+        key = item.happend_at.in_time_zone('Beijing').strftime('%F')
+        hash[key] ||= 0
+        hash[key] += item.amount
+      else
+        item.tags_id.each do |tag_id|
+          key = tag_id
+          hash[key] ||= 0
+          hash[key] += item.amount
+        end
+      end
     end
     groups = hash
-      .map { |key, value| { "happend_at": key, amount: value } }
-      .sort { |a, b| a[:happend_at] <=> b[:happend_at] }
+      .map { |key, value| {"#{params[:group_by]}": key, amount: value} }
+    if params[:group_by] == 'happend_at'
+      groups.sort! { |a, b| a[:happend_at] <=> b[:happend_at] }
+    elsif params[:group_by] == 'tag_id'
+      groups.sort! { |a, b| b[:amount] <=> a[:amount] }
+    end
     render json: {
       groups: groups,
-      total: items.sum(:amount),
+      total: items.sum(:amount)
     }
   end
 end
