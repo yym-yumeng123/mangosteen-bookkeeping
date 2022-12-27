@@ -13,8 +13,10 @@ RSpec.describe "Items", type: :request do
     it "分页" do
       user1 = User.create email: '1@qq.com'
       user2 = User.create email: '2@qq.com'
-      11.times { Item.create amount: 100, user_id: user1.id }
-      11.times { Item.create amount: 100, user_id: user2.id }
+      tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
+      tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
+      11.times { Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id }
+      11.times { Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user2.id }
 
       get '/api/v1/items', headers: user1.generate_auth_header
       expect(response).to have_http_status 200
@@ -27,9 +29,11 @@ RSpec.describe "Items", type: :request do
     end
     it "按时间筛选" do
       user1 = User.create email: '1@qq.com'
-      item1 = Item.create amount: 100, created_at: '2018-01-02', user_id: user1.id
-      item2 = Item.create amount: 100, created_at: '2018-01-02', user_id: user1.id
-      item3 = Item.create amount: 100, created_at: '2019-01-01', user_id: user1.id
+      tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
+      tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
+      item1 = Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
+      item2 = Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
+      # item3 = Item.create amount: 100, created_at: '2019-01-01', user_id: user1.id
 
       get '/api/v1/items?created_after=2018-01-01&created_before=2018-01-03', 
         headers: user1.generate_auth_header
@@ -41,7 +45,9 @@ RSpec.describe "Items", type: :request do
     end
     it "按时间筛选（边界条件）" do
       user1 = User.create email: '1@qq.com'
-      item1 = Item.create amount: 100, created_at: '2018-01-01', user_id: user1.id
+      tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
+      tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
+      item1 = Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
 
       get '/api/v1/items?created_after=2018-01-01&created_before=2018-01-02',
         headers: user1.generate_auth_header
@@ -52,8 +58,9 @@ RSpec.describe "Items", type: :request do
     end
     it "按时间筛选（边界条件2）" do
       user1 = User.create email: '1@qq.com'
-      item1 = Item.create amount: 100, created_at: '2018-01-01', user_id: user1.id
-      item2 = Item.create amount: 100, created_at: '2017-01-01', user_id: user1.id
+      tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
+      tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
+      item1 = Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
       get '/api/v1/items?created_after=2018-01-01', 
         headers: user1.generate_auth_header
       expect(response).to have_http_status 200
@@ -63,8 +70,9 @@ RSpec.describe "Items", type: :request do
     end
     it "按时间筛选（边界条件3）" do
       user1 = User.create email: '1@qq.com'
-      item1 = Item.create amount: 100, created_at: '2018-01-01', user_id: user1.id
-      item2 = Item.create amount: 100, created_at: '2019-01-01', user_id: user1.id
+      tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
+      tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
+      item1 = Item.create amount: 100, tags_id: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
 
       get '/api/v1/items?created_before=2018-01-02', 
         headers: user1.generate_auth_header
