@@ -1,0 +1,24 @@
+zh-CN:
+  activerecord:
+    errors:
+      messages:
+        invalid: 格式不正确
+      models:
+        validation_code:
+          attributes:
+            email:
+              invalid: 邮件地址格式不正确
+        tag:
+          attributes:
+            name:
+              blank: 标签不能为空
+            sign:
+              blank: sign 不能为空
+        item:
+          attributes:
+            amount:
+              blank: 金额不能为空
+            tags_id:
+              blank: 标签组不能为空
+            happend_at:
+              blank: happend_at 不能为空
