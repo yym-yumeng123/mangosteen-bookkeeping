@@ -3,7 +3,7 @@ class Api::V1::ItemsController < ApplicationController
     current_user_id = request.env["current_user_id"]
     return head :unauthorized if current_user_id.nil?
     items = Item.where({ user_id: current_user_id })
-      # .where({ created_at: params[:created_after]..params[:created_before] })
+    # .where({ created_at: params[:created_after]..params[:created_before] })
       .where({ happend_at: params[:happend_after]..params[:happend_before] })
     items = items.where(kind: params[:kind]) unless params[:kind].blank?
     items = items.page(params[:page])
@@ -19,7 +19,7 @@ class Api::V1::ItemsController < ApplicationController
       page: params[:page] || 1,
       per_page: Item.default_per_page,
       count: Item.count,
-    } }
+    } }, methods: :tags
   end
 
   def create
@@ -39,8 +39,8 @@ class Api::V1::ItemsController < ApplicationController
       .where({ happen_at: params[:happen_after]..params[:happen_before] })
     income_items = []
     expenses_items = []
-    items.each {|item|
-      if item.kind === 'income'
+    items.each { |item|
+      if item.kind === "income"
         income_items << item
       else
         expenses_items << item
@@ -50,7 +50,6 @@ class Api::V1::ItemsController < ApplicationController
     expenses = expenses_items.sum(&:amount)
     render json: { income: income, expenses: expenses, balance: income - expenses }
   end
-
 
   def summary
     hash = Hash.new
