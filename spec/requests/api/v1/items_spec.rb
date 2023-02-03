@@ -16,13 +16,13 @@ RSpec.describe "Items", type: :request do
       user2 = User.create email: '2@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      11.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id }
-      11.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user2.id }
+      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id }
+      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user2.id }
 
       get '/api/v1/items', headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
-      expect(json['resources'].size).to eq 10
+      expect(json['resources'].size).to eq 25
       get '/api/v1/items?page=2', headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)

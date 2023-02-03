@@ -17,14 +17,16 @@ resource "账目" do
     let(:created_before) { Time.now + 10.days }
     example "获取账目" do
       tag = Tag.create name: 'x', sign:'x', user_id: current_user.id
-      11.times do 
-        Item.create! amount: 100, happend_at: '2020-10-30', tag_ids: [tag.id], 
-          user_id: current_user.id 
-      end
+      # 11.times do 
+      #   Item.create! amount: 100, happend_at: '2020-10-30', tag_ids: [tag.id], 
+      #     user_id: current_user.id 
+      # end
+
+      create_list :item, Item.default_per_page+1, tag_ids: [tag.id], user: current_user
       do_request
       expect(status).to eq 200
       json = JSON.parse response_body
-      expect(json['resources'].size).to eq 10
+      expect(json["resources"].size).to eq Item.default_per_page
     end
   end
 

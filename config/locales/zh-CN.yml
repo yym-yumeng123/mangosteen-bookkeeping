@@ -18,7 +18,7 @@ zh-CN:
           attributes:
             amount:
               blank: 金额不能为空
-            tags_id:
+            tag_ids:
               blank: 标签组不能为空
             happend_at:
               blank: happend_at 不能为空
