@@ -5,7 +5,8 @@ class Api::V1::ItemsController < ApplicationController
     items = Item.where({ user_id: current_user_id })
       # .where({ created_at: params[:created_after]..params[:created_before] })
       .where({ happend_at: params[:happend_after]..params[:happend_before] })
-      .page(params[:page])
+    items = items.where(kind: params[:kind]) unless params[:kind].blank?
+    items = items.page(params[:page])
 
     initValue = { expenses: 0, income: 0 }
     summary = items.inject (initValue) { |result, item|
@@ -22,7 +23,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new params.permit(:amount, :happend_at, tag_ids: [])
+    item = Item.new params.permit(:amount, :happend_at, :kind, tag_ids: [])
     item.user_id = request.env["current_user_id"]
     if item.save
       render json: { resource: item }

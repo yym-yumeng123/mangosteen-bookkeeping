@@ -47,7 +47,7 @@ RSpec.describe "Api::V1::Tags", type: :request do
     end
     it '登录后创建标签' do
       user = User.create email: '1@qq.com'
-      post '/api/v1/tags', params: {name: 'name', sign: 'sign'}, headers: user.generate_auth_header
+      post '/api/v1/tags', params: {name: 'name', sign: 'sign', kind: 'expenses'}, headers: user.generate_auth_header
       expect(response).to have_http_status(200)
       json = JSON.parse response.body
       expect(json['resource']['name']).to eq 'name'
@@ -55,7 +55,7 @@ RSpec.describe "Api::V1::Tags", type: :request do
     end
     it '登录后创建标签失败，因为没填 name' do
       user = User.create email: '1@qq.com'
-      post '/api/v1/tags', params: {sign: 'sign'}, headers: user.generate_auth_header
+      post '/api/v1/tags', params: {sign: 'sign', kind: 'income'}, headers: user.generate_auth_header
       expect(response).to have_http_status(422)
       json = JSON.parse response.body
       expect(json['errors']['name'][0]).to eq "标签不能为空"
