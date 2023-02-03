@@ -4,7 +4,8 @@ RSpec.describe "Items", type: :request do
   describe "获取账目" do
     it "分页，未登录" do
       user1 = User.create email: '1@qq.com'
-      user2 = User.create email: '2@qq.com'
+      # user2 = User.create email: '2@qq.com'
+      user2 = create :user
       11.times { Item.create amount: 100, user_id: user1.id }
       11.times { Item.create amount: 100, user_id: user2.id }
       get '/api/v1/items'
