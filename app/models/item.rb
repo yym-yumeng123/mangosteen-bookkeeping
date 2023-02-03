@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  belongs_to :user
+  
   enum kind: { expenses: 1, income: 2}
 
   validates :amount, presence: true
