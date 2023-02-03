@@ -5,7 +5,15 @@ class Api::V1::ItemsController < ApplicationController
     items = Item.where({ user_id: current_user_id })
       .where({ created_at: params[:created_after]..params[:created_before] })
       .page(params[:page])
-    render json: { resources: items, pager: {
+
+    initValue = { expenses: 0, income: 0 }
+    summary = items.inject (initValue) { |result, item|
+      result[item.kind.to_sym] += item.amount
+      result
+    }
+    summary[:balance] = summary[:income] - summary[:expenses]
+
+    render json: { resources: items, summary: summary, pager: {
       page: params[:page] || 1,
       per_page: Item.default_per_page,
       count: Item.count,
@@ -25,12 +33,12 @@ class Api::V1::ItemsController < ApplicationController
   def summary
     hash = Hash.new
     items = Item
-      .where(user_id: request.env['current_user_id'])
+      .where(user_id: request.env["current_user_id"])
       .where(kind: params[:kind])
       .where(happend_at: params[:happened_after]..params[:happened_before])
     items.each do |item|
-      if params[:group_by] == 'happend_at'
-        key = item.happend_at.in_time_zone('Beijing').strftime('%F')
+      if params[:group_by] == "happend_at"
+        key = item.happend_at.in_time_zone("Beijing").strftime("%F")
         hash[key] ||= 0
         hash[key] += item.amount
       else
@@ -42,15 +50,15 @@ class Api::V1::ItemsController < ApplicationController
       end
     end
     groups = hash
-      .map { |key, value| {"#{params[:group_by]}": key, amount: value} }
-    if params[:group_by] == 'happend_at'
+      .map { |key, value| { "#{params[:group_by]}": key, amount: value } }
+    if params[:group_by] == "happend_at"
       groups.sort! { |a, b| a[:happend_at] <=> b[:happend_at] }
-    elsif params[:group_by] == 'tag_id'
+    elsif params[:group_by] == "tag_id"
       groups.sort! { |a, b| b[:amount] <=> a[:amount] }
     end
     render json: {
       groups: groups,
-      total: items.sum(:amount)
+      total: items.sum(:amount),
     }
   end
 end
