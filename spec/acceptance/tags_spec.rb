@@ -27,6 +27,7 @@ resource "标签" do
   post "/api/v1/tags" do
     parameter :name, '名称', required: true
     parameter :sign, '符号', required: true
+    parameter :kind, '类型', required: true, in: ['expenses', 'income']
     with_options :scope => :resource do
       response_field :id, 'ID'
       response_field :name, "名称"
@@ -36,6 +37,7 @@ resource "标签" do
     end
     let (:name) { 'x' }
     let (:sign) { 'x' }
+    let (:kind) { 'income' }
     example "创建标签" do
       do_request
       expect(status).to eq 200
