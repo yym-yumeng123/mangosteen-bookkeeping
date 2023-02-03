@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resource :me, only: [:show]
       resources :items do
         collection do
+          get :balance
           get :summary
         end
       end

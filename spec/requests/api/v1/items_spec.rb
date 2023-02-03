@@ -16,8 +16,8 @@ RSpec.describe "Items", type: :request do
       user2 = User.create email: '2@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id }
-      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user2.id }
+      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id }
+      25.times { Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user2.id }
 
       get '/api/v1/items', headers: user1.generate_auth_header
       expect(response).to have_http_status 200
@@ -32,11 +32,10 @@ RSpec.describe "Items", type: :request do
       user1 = User.create email: '1@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
-      item2 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
-      # item3 = Item.create amount: 100, created_at: '2019-01-01', user_id: user1.id
+      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id
+      item2 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id
 
-      get '/api/v1/items?created_after=2018-01-01&created_before=2018-01-03', 
+      get '/api/v1/items?happend_after=2018-01-01&happend_before=2018-01-03', 
         headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
@@ -48,9 +47,9 @@ RSpec.describe "Items", type: :request do
       user1 = User.create email: '1@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
+      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id
 
-      get '/api/v1/items?created_after=2018-01-01&created_before=2018-01-02',
+      get '/api/v1/items?happend_after=2018-01-01&happend_before=2018-01-02',
         headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
@@ -61,8 +60,8 @@ RSpec.describe "Items", type: :request do
       user1 = User.create email: '1@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
-      get '/api/v1/items?created_after=2018-01-01', 
+      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id
+      get '/api/v1/items?happend_after=2018-01-01', 
         headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
@@ -73,9 +72,9 @@ RSpec.describe "Items", type: :request do
       user1 = User.create email: '1@qq.com'
       tag1 = Tag.create name: 'tag1', sign: 'x', user_id: user1.id
       tag2 = Tag.create name: 'tag2', sign: 'x', user_id: user1.id
-      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', created_at: '2018-01-01', user_id: user1.id
+      item1 = Item.create amount: 100, tag_ids: [tag1.id,tag2.id],happend_at: '2018-01-01T00:00:00+08:00', user_id: user1.id
 
-      get '/api/v1/items?created_before=2018-01-02', 
+      get '/api/v1/items?happend_before=2018-01-02', 
         headers: user1.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
@@ -112,6 +111,27 @@ RSpec.describe "Items", type: :request do
       expect(json['errors']['amount'][0]).to eq "金额不能为空"
       expect(json['errors']['tag_ids'][0]).to eq "标签组不能为空"
       expect(json['errors']['happend_at'][0]).to eq "happend_at 不能为空"
+    end
+  end
+
+  describe "获取余额" do
+    it "未登录" do
+      get "/api/v1/items/balance?happen_after=2018-01-01&happen_before=2019-01-01"
+      expect(response).to have_http_status 401
+    end
+    it "登录" do
+      user = create :user
+      create :item, user: user, kind: 'expenses', amount: 100, happend_at: '2018-03-02T16:00:00.000Z'
+      create :item, user: user, kind: 'expenses', amount: 200, happend_at: '2018-03-02T16:00:00.000Z'
+      create :item, user: user, kind: 'income', amount: 100, happend_at: '2018-03-02T16:00:00.000Z'
+      create :item, user: user, kind: 'income', amount: 200, happend_at: '2018-03-02T16:00:00.000Z'
+
+      get "/api/v1/items/balance?happen_after=2018-03-02T15:00:00.000Z&happen_before=2018-03-02T17:00:00.000Z", headers: user.generate_auth_header
+      expect(response).to have_http_status 200
+      json = JSON.parse(response.body)
+      expect(json["income"]).to eq 300
+      expect(json["expenses"]).to eq 300
+      expect(json["balance"]).to eq 0
     end
   end
 
