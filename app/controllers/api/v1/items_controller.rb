@@ -4,7 +4,7 @@ class Api::V1::ItemsController < ApplicationController
     return head :unauthorized if current_user_id.nil?
     items = Item.where({ user_id: current_user_id })
     # .where({ created_at: params[:created_after]..params[:created_before] })
-      .where({ happend_at: params[:happend_after]..params[:happend_before] })
+      .where({ happend_at: datetime_with_zone(params[:happend_after])..datetime_with_zone(params[:happend_before]) })
     items = items.where(kind: params[:kind]) unless params[:kind].blank?
     items = items.page(params[:page])
 
@@ -18,7 +18,7 @@ class Api::V1::ItemsController < ApplicationController
     render json: { resources: items, summary: summary, pager: {
       page: params[:page] || 1,
       per_page: Item.default_per_page,
-      count: Item.count,
+      count: items.count,
     } }, methods: :tags
   end
 
